@@ -1,0 +1,13 @@
+.DS_Store
+.build/
+.swiftpm/
+dist/
+*.xcuserstate
+xcuserdata/
+
+# Local evidence and release staging (never publish personal machine paths)
+verification/
+release-staging/
+backups/
+*.dmg
+*.zip
