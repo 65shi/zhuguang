@@ -1,0 +1,43 @@
+name: 问题反馈 / Bug report
+description: 报告兼容性、界面或显示行为问题
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请勿上传序列号、硬件 UUID、账号、令牌或含私人内容的桌面截图。
+        安全漏洞请先阅读 SECURITY.md；不要在公开 Issue 中发布敏感细节。
+  - type: input
+    id: version
+    attributes:
+      label: 逐光版本
+      placeholder: "例如 1.0.2；下载版本或自行构建"
+    validations:
+      required: true
+  - type: input
+    id: hardware
+    attributes:
+      label: Mac 机型与屏幕
+      placeholder: "例如 MacBook Pro 14-inch / M2 Pro / 内置 Liquid Retina XDR"
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS 版本
+      placeholder: "例如 macOS 26.1"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤、预期与实际行为
+      description: 说明是否连接外接屏幕、使用全屏视频、低电量模式或其他调色/增亮工具。
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: 脱敏后的诊断输出（可选）
+      description: 使用 --diagnose，只读取屏幕能力。上传前请再次检查个人信息。
+      render: json
