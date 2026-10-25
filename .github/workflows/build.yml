@@ -1,0 +1,39 @@
+name: Build and policy checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-14
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Show Swift version
+        run: swift --version
+      - name: Run policy checks and debug build
+        run: bash scripts/test.sh
+      - name: Build local-signed release packages
+        run: bash scripts/build-app.sh --dmg
+      - name: Check release architecture and signature
+        run: |
+          file dist/逐光.app/Contents/MacOS/Zhuguang
+          codesign --verify --strict dist/逐光.app
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Zhuguang-macOS-build
+          path: |
+            dist/Zhuguang.zip
+            dist/Zhuguang.dmg
+            dist/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 14
